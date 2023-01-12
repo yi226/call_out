@@ -14,7 +14,7 @@ class UpdatePage extends StatefulWidget {
 
 class _UpdatePageState extends State<UpdatePage> {
   var url =
-      'https://github.com/yi226/CallOut/releases/download/new/update.json';
+      'https://github.com/yi226/Config/releases/download/call_out/update.json';
   var _message = '';
   final Uri _sourceUrl = Uri.parse('https://github.com/yi226/CallOut');
 
@@ -48,15 +48,6 @@ class _UpdatePageState extends State<UpdatePage> {
                     url: url,
                     themeColor: '#87FA875D',
                   );
-                },
-              ),
-            const SizedBox(height: 20),
-            if (Platform.isAndroid)
-              ElevatedButton(
-                child: const Text('后台更新'),
-                onPressed: () {
-                  FlutterXUpdate.checkUpdate(
-                      url: url, supportBackgroundUpdate: true);
                 },
               ),
             const SizedBox(height: 20),
@@ -116,7 +107,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   title: const Text(''),
                   content: Text(_message),
                   actions: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       child: const Text("确定"),
                       onPressed: () {
                         Navigator.of(context).pop();

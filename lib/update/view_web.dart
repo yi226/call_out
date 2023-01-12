@@ -31,7 +31,7 @@ class _UpdatePageState extends State<UpdatePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            Text('当前版本: 2.0.7'),
+            Text('当前版本: 2.0.8'),
           ],
         ),
       ),

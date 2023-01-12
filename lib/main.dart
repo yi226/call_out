@@ -448,6 +448,7 @@ class _CheckHomeState extends State<CheckHome> {
     return MaterialApp(
         locale: const Locale('zh', 'CH'),
         debugShowCheckedModeBanner: false,
+        title: "call_out",
         themeMode: themeMode,
         theme: ThemeData.light(useMaterial3: true),
         darkTheme: ThemeData.dark(useMaterial3: true),

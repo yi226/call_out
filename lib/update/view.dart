@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_xupdate/flutter_xupdate.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,7 +38,7 @@ class _UpdatePageState extends State<UpdatePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('当前版本: 2.0.7'),
+            const Text('当前版本: 2.0.8'),
             const SizedBox(height: 20),
             if (Platform.isAndroid)
               ElevatedButton(
@@ -95,9 +96,13 @@ class _UpdatePageState extends State<UpdatePage> {
               //在下载过程中，如果点击了取消的话，是否弹出切换下载方式的重试提示弹窗
               enableRetry: false)
           .then((value) {
-        print("初始化成功: $value");
+        if (kDebugMode) {
+          print("初始化成功: $value");
+        }
       }).catchError((error) {
-        print(error);
+        if (kDebugMode) {
+          print(error);
+        }
       });
 
       FlutterXUpdate.setErrorHandler(

@@ -215,7 +215,7 @@ class _CheckHomeState extends State<CheckHome> {
           children: [
             const Text(
               '欢迎使用本软件',
-              style: TextStyle(fontSize: 20, color: Colors.blue),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Container(
               height: 50,
@@ -363,11 +363,8 @@ class _CheckHomeState extends State<CheckHome> {
             child: ListView(
           children: saved.map((e) {
             return Container(
-              color: e == barText
-                  ? Colors.grey[(themeMode == ThemeMode.light ? 200 : 500)]
-                  : (themeMode == ThemeMode.light
-                      ? Colors.white
-                      : Colors.grey[800]),
+              color:
+                  e == barText ? Theme.of(context).colorScheme.onPrimary : null,
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Row(
                 children: [
@@ -375,11 +372,7 @@ class _CheckHomeState extends State<CheckHome> {
                     child: SizedBox(
                         width: 80,
                         child: Text(e,
-                            style: TextStyle(
-                                color: themeMode == ThemeMode.light
-                                    ? Colors.black
-                                    : Colors.white,
-                                fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                             overflow: TextOverflow.ellipsis)),
                     onPressed: () async {
                       final state = Navigator.of(context);
@@ -450,8 +443,11 @@ class _CheckHomeState extends State<CheckHome> {
         debugShowCheckedModeBanner: false,
         title: "call_out",
         themeMode: themeMode,
-        theme: ThemeData.light(useMaterial3: true),
-        darkTheme: ThemeData.dark(useMaterial3: true),
+        theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
+        darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            useMaterial3: true,
+            colorSchemeSeed: Colors.blue),
         home: Builder(builder: (context) {
           return firstOpen
               ? _firstOpenWidget(context)
@@ -478,20 +474,17 @@ class _CheckHomeState extends State<CheckHome> {
                                 return Column(
                                   children: [
                                     CheckboxListTile(
-                                        title: Text(e.name,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: e.isSelected
-                                                ? const TextStyle(
-                                                    color: Colors.grey,
-                                                    decoration:
-                                                        TextDecoration
-                                                            .lineThrough)
-                                                : TextStyle(
-                                                    color: themeMode ==
-                                                            ThemeMode.light
-                                                        ? Colors.black
-                                                        : Colors.white,
-                                                  )),
+                                        title: Text(
+                                          e.name,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: e.isSelected
+                                              ? const TextStyle(
+                                                  color: Colors.grey,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                )
+                                              : null,
+                                        ),
                                         controlAffinity:
                                             ListTileControlAffinity.leading,
                                         value: e.isSelected,
@@ -501,13 +494,11 @@ class _CheckHomeState extends State<CheckHome> {
                                             e.isSelected = v!;
                                             // 保存未选中的
                                             if (!e.isSelected) {
-                                              if (!unselectUser
-                                                  .contains(e)) {
+                                              if (!unselectUser.contains(e)) {
                                                 unselectUser.add(e);
                                               }
                                             } else {
-                                              if (unselectUser
-                                                  .contains(e)) {
+                                              if (unselectUser.contains(e)) {
                                                 unselectUser.remove(e);
                                               }
                                             }
@@ -531,27 +522,30 @@ class _CheckHomeState extends State<CheckHome> {
                                 UnSelectPage(unselectUser: unselectUser))));
                       } else {
                         showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: const Text('恭喜'),
-                                  content: const Text(('作业已交齐')),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: const Text("确定"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                ));
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('恭喜'),
+                            content: const Text(('作业已交齐')),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text("确定"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
                       }
                     },
                     tooltip: '是否交齐',
-                    backgroundColor:
-                        unselectUser.isEmpty ? Colors.blue : Colors.red,
+                    backgroundColor: unselectUser.isEmpty ? null : Colors.red,
                     child: unselectUser.isEmpty
                         ? const Icon(Icons.check)
-                        : Text(unselectUser.length.toString()),
+                        : Text(
+                            unselectUser.length.toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
                   ),
                 );
         }));

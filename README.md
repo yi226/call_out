@@ -6,7 +6,7 @@ A software for roll call.
 
 Web: https://yi226.github.io/call/
 
-Android: https://github.com/yi226/call_out/releases/tag/V2.0.8
+Android: https://github.com/y6/call_out/releases
 
 Build from source:
 

@@ -16,7 +16,7 @@ class _UpdatePageState extends State<UpdatePage> {
   var url =
       'https://github.com/yi226/Config/releases/download/call_out/update.json';
   var _message = '';
-  final Uri _sourceUrl = Uri.parse('https://github.com/yi226/CallOut');
+  final Uri _sourceUrl = Uri.parse('https://github.com/yi226/call_out');
   bool _loading = false;
 
   Future<void> _launchUrl() async {
@@ -41,7 +41,7 @@ class _UpdatePageState extends State<UpdatePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text('当前版本: 2.0.9'),
+                const Text('当前版本: 2.0.10'),
                 const SizedBox(height: 20),
                 if (Platform.isAndroid)
                   ElevatedButton(
@@ -132,7 +132,10 @@ class _UpdatePageState extends State<UpdatePage> {
 
       FlutterXUpdate.setErrorHandler(
           onUpdateError: (Map<String, dynamic>? message) async {
-        _message = message!["message"];
+        setState(() {
+          _loading = false;
+          _message = message!["message"];
+        });
         showDialog(
           context: context,
           builder: (context) => AlertDialog(

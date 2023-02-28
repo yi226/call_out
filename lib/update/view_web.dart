@@ -9,7 +9,7 @@ class UpdatePage extends StatefulWidget {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
-  final Uri _sourceUrl = Uri.parse('https://github.com/yi226/CallOut');
+  final Uri _sourceUrl = Uri.parse('https://github.com/yi226/call_out');
 
   Future<void> _launchUrl() async {
     if (!await launchUrl(_sourceUrl)) {
@@ -31,7 +31,7 @@ class _UpdatePageState extends State<UpdatePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            Text('当前版本: 2.0.8'),
+            Text('当前版本: 2.0.10'),
           ],
         ),
       ),
